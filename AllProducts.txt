@@ -1,0 +1,24 @@
+ID15623, Iphone, 60GB, 12, red, 500.0 €, 5
+
+ID1263, Iphone, 60GB, 12, blue, 500.0 €, 20
+
+ID1236, Iphone, 120GB, 12, green, 650.0 €, 30
+
+ID85223, Iphone, 120GB, 13, white, 800.0 €, 15
+
+ID2120, Iphone, 120GB, 14, black, 1100.0 €, 23
+
+ID85621, Samsung, 65GB, S11, blue, 800.0 €, 17
+
+ID85324, Nokia, 65GB, 3310, white, 100.0 €, 3
+
+ID233654, Samsung, 90GB, S10, red, 9053.0 €, 14
+
+ID65264, Lenovo, 800.0 €, 20
+
+ID53345, Apple MacBook Air, 2000.0 €, 15
+
+ID935264, Lenovo, 650.0 €, 12
+
+ID15589846, Dell 3310, 310.0 €, 1
+
