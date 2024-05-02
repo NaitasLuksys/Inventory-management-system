@@ -118,7 +118,9 @@ Klasės **Smartphones** ir **Laptops** paveldi bazinės klasės **Product** atri
 
 - **Inkapsuliacija** - Inkapsuliavimas yra viena iš pagrindinių objektinio programavimo koncepcijų. Jame aprašoma duomenų apjungimo idėja ir metodai, kurie veikia su duomenimis viename vienete (klasėje). Tai apriboja tiesioginę prieigą prie kintamųjų ir metodų ir gali užkirsti kelią atsitiktiniam duomenų pakeitimui. Inkapculiacija paslepia duomenis ir jei tų duomenų reikia kitoms klasėms, jos iš pradžių turi kreiptis į tas klases, kurios turi šiuos duomenis. **'Protected'** tipo nariai negali būti pasiekiami už klasės ribų, tačiau jie gali būti pasiekiami iš pačios klase ar jos poklasių. **'Private'** tipo nariai yra panašūs į **'Protected'** narius, skirtumas yra tas, kad klasės nariai, apibrėžti kaip **'Private'**, neturėtų būti prieinami nei klasėje, nei jokia bazinė klasė.
 Šioje programoje visi **Product** klasės atributai yra **'Protected'** tipo, tam, kad būtų išvengta tiesioginio duomenų keitimo.
+```
         self._product_id = product_id
         self._name = name
         self._price = price
         self._quantity = quantity
+```
