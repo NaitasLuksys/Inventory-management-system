@@ -34,7 +34,7 @@ Tačiau, jei naudotojas nori išeiti iš šios operacijos konsolėje įvesti **e
 ![Reference image](/screenshots/penkta.png)
 
 ## Programos analizė
-
+### OOP Principai:
 - **Polimorfizmas** - pagridninė objektinio programavimo koncepcija, kuri yra pasiekiama, kai operacija (metodas) gali būti vykdoma skirtingai, priklausomai nuo konkrečios klasės realizacijos. Tai pasiekiama aprašant metodus bazinėje klasėje ir perrašant atitinkamus metodus paveldinčiose klasėse.
 
 Programoje *Inventory Management System* polimorfizmas yra naudojamas keliais metodais:
@@ -124,3 +124,49 @@ Klasės **Smartphones** ir **Laptops** paveldi bazinės klasės **Product** atri
         self._price = price
         self._quantity = quantity
 ```
+### Dizaino šablonai:
+- **Singleton Pattern** - šis dizaino šablonas užtikrina būtų sukurtas tik vienas klasės egzempliorus ir suteikia globalinę prieigą prie jo. Šis **'design pattern'** yra panaudotas ir aprašytas dviejose klasėse: **Inventory** ir **ProductFactory**. **Inventory** klasė užtikrina, kad visoje programoje būtų tik vienas jos egzempliorius. Tai labai svarbu, nes inventorius turi būti nuoseklus visoje sistemoje, nepaisant to, kur į jį yra kreipiamasi. Jei būtų keli egzemplioriai, galėtų kilti inventoriaus duomenų neatitikimai.
+```python
+class Inventory:
+    _instance = None
+
+    def __init__(self):
+        if not Inventory._instance:
+            Inventory._instance = self
+            self._products = []
+            self._discounted_products = []
+
+    @classmethod
+    def get_instance(cls):
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+```
+Panašiai kaip **Inventory** klasėje, **ProductFactory** klasė įgyvendina **'singleton pattern'**, kad užtikrintų, jog visoje programoje yra tik vienas egzempliorius. Tai būtina, nes **ProductFactory** yra atsakinga už produkto egzempliorių kūrimą, o kelių egzempliorių egzistavimas gali sukelti produkto kūrimo neatitikimų.
+```python
+class ProductFactory:
+    _instance = None
+
+    def __init__(self):
+        if not ProductFactory._instance:
+            ProductFactory._instance = self
+            self._products = []
+
+    @classmethod
+    def get_instance(cls):
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+```
+- **Factory Method** - tai yra kūrimo **'design pattern'**, kuris suteikia sąsają superklasės objektams kurti, tačiau leidžia poklasiams keisti kuriamų objektų tipą. **Factory method** kode panaudotas **ProductFactory** klasėje (*create_product()* metodas). Šis metodas suteikia galimybę dinamiškai sukurti skirtingo tipo produktus. Metodas *create_product()* produkto kūrimo procesą padaro abstrakčiu ir taip suteikia lankstumo kode bei palengvina darbą. Su šiuo metodu galima lengvai sukurti naujus produkto tipus, nepakeičiant jau esamo kodo.
+```python
+    def create_product(self, product_type, *args, **kwargs):
+        if product_type == "smartphone":
+            product = Smartphones(*args, **kwargs)
+        elif product_type == "laptop":
+            product = Laptops(*args, **kwargs)
+        else:
+            raise ValueError("Invalid product type")
+        return product
+```
+## Rezultatai ir apibendrinimas
