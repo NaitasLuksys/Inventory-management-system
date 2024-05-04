@@ -5,28 +5,28 @@
 
 ## Tema - *Inventory management system*
 
-Tema yra susijusi su parduotuvės prekių kiekio papildymu naujomis prekėmis. Šioje programoje dirbama būtent su elektroninių prekių inventoriumi (mobilieji telefonai ir nešiojami kompiuteriai).
+Tema yra susijusi su parduotuvės prekių kiekio papildymu naujomis prekėmis. Šioje programoje dirbama būtent su elektroninių prekių inventoriumi - mobilieji telefonai ir nešiojami kompiuteriai.
 
 **Programos principas:**
 Ši programa suteikia struktūrinį inventoriaus prekių valdymo metodą, leidžiantį pridėti naujų produktų, taikyti nuolaidas ir saugoti produktų informaciją keliuose failuose. Tai demonstruoja objektinio programavimo, failų tvarkymo ir vartotojo sąveikos principus.
 
 ##### Visa informacija apie prekes yra saugoma skirtinguose failuose:
-- Faile **Smartphones.txt** yra saugoma informacija apie mobiliuosius telefonus *(prekės ID, telefono prekės ženklas, telefono vidinė atmintis, modelis, spalva, kaina, kiekis)*
-- Faile **Laptops.txt** yra saugoma informacija apie nešiojamus kompiuterius *(prekės ID, kompiuterio prekės ženklas, kaina, kiekis)*
+- Faile **Smartphones.txt** yra saugoma informacija tik apie mobiliuosius telefonus *(prekės ID, telefono prekės ženklas, telefono vidinė atmintis, modelis, spalva, kaina, kiekis)*
+- Faile **Laptops.txt** yra saugoma informacija tik apie nešiojamus kompiuterius *(prekės ID, kompiuterio prekės ženklas, kaina, kiekis)*
 - Faile **AllProducts.txt** yra saugoma viso inventoriaus informacija, šiuo atveju, visų mobiliųjų telefonų bei nešiojamų kompiuterių informacija kartu.
 
 **Kaip naudotis programa:**
 Paleidus programą, naudotojas konsolėje turi pasirinkti, kokį veiksmą nori atlikti:
 
 ![Reference image](/screenshots/Pirma.png)
-- Jei reikia pridėti naują prekę, pasirenkama pirma operacija - įvedant **1**. Toliau reikia pasirinkti kokią prekė yra pridedama, o jei naudotojas nori išeiti iš šios operacijos, konsolėje įvesti: **exit**
+- Jei reikia pridėti naują prekę, pasirenkama pirma operacija, įvedant **1**. Toliau reikia pasirinkti kokią prekė yra pridedama, o jei naudotojas nori išeiti iš šios operacijos, konsolėje įvesti **exit**
 
 ![Reference image](/screenshots/antra.png)
 - Jei naudotojas nori atlikti antrąją operaciją, įvedamas skaičius **2** ir tuomet įvedamas prekės 'ID', pvz.: *ID1236*
 Tačiau, jei naudotojas nori išeiti iš šios operacijos konsolėje įvesti **exit**
 
 ![Reference image](/screenshots/trecia.png)
-Įvedus 'ID', įvedamas nuolaidos dydis dešimtaine trupmena 10% atitinka 0.1:
+Įvedus 'ID', įvedamas nuolaidos dydis dešimtaine trupmena (10% atitinka 0.1):
 
 ![Reference image](/screenshots/ketvirta.png)
 - Jei naudotojas nori galutinai išeiti iš programos, įvedamas skaičius **3**. Tuomet, jei buvo tokių prekių, kurioms buvo pritaikytos nuolaidos, jos yra atspausdinamos išeinant iš programos:
@@ -45,7 +45,7 @@ Metodas aprašomas abstrakčioje klasėje **Product**, o vaikinės klasės **Sma
         product_info = product.get_product_info()
         file.write(", ".join(map(str, product_info)) + "\n")
         file.write("\n")
- # Kai šis metodas yra iškviečiamas, jis yra vykdomas pagal keikvieno produkto tipą. Pavyzdžiui, jei **'product'** yra **'Smartphones'** objektas, bus naudojama **'Smartphones'** klasės realizacija, o jei **'product'** yra **'Laptops'** objektas, bus naudojama **'Laptops'** klasės realizacija. 
+ # Kai šis metodas yra iškviečiamas, jis yra vykdomas pagal keikvieno produkto tipą. Pavyzdžiui, jei product yra Smartphones objektas, bus naudojama Smartphones klasės realizacija, o jei product yra Laptops objektas, bus naudojama Laptops klasės realizacija. 
 ```
 2. **Metodas apply_discount():**
 Metodas aprašomas abstrakčioje klasėje **Product**, o vaikinės klasės **Smartphones** ir **Laptops** perrašo ši metodą taip, kad taikytų nuolaidą konkrečiam produkto tipui. Polimorfizmo taikymas šiam metodui atrodo taip:
@@ -63,7 +63,7 @@ Metodas aprašomas abstrakčioje klasėje **Product**, o vaikinės klasės **Sma
     def apply_discount_to_selected_products(self, product):
         product._price = product._discounted_price
         self._discounted_products.append(product)
- # Šis metodas gali priimti tiek **'Smartphones'**, tiek **'Laptops'** klasių objektus ir pritaikyti nuolaidą atsižvelgiant į kiekvieno produkto realizaciją.
+ # Šis metodas gali priimti tiek Smartphones, tiek Laptops klasių objektus ir pritaikyti nuolaidą atsižvelgiant į kiekvieno produkto realizaciją.
 ```
 - **Abstrakcija** - Python programavimo kalboje abstrakcija paslepia sudėtingas funkcijas ir detales, kurių nereikia naudotojui. Abstrakcija programoje:
 ```python
@@ -125,7 +125,7 @@ Klasės **Smartphones** ir **Laptops** paveldi bazinės klasės **Product** atri
         self._quantity = quantity
 ```
 ### Dizaino šablonai:
-- **Singleton Pattern** - šis dizaino šablonas užtikrina būtų sukurtas tik vienas klasės egzempliorus ir suteikia globalinę prieigą prie jo. Šis **'design pattern'** yra panaudotas ir aprašytas dviejose klasėse: **Inventory** ir **ProductFactory**. **Inventory** klasė užtikrina, kad visoje programoje būtų tik vienas jos egzempliorius. Tai labai svarbu, nes inventorius turi būti nuoseklus visoje sistemoje, nepaisant to, kur į jį yra kreipiamasi. Jei būtų keli egzemplioriai, galėtų kilti inventoriaus duomenų neatitikimai.
+- **Singleton Pattern** - šis dizaino šablonas užtikrina, kad būtų sukurtas tik vienas klasės egzempliorus ir suteikia globalinę prieigą prie jo. Šis **'design pattern'** yra panaudotas ir aprašytas dviejose klasėse: **Inventory** ir **ProductFactory**. **Inventory** klasė užtikrina, kad visoje programoje būtų tik vienas jos egzempliorius. Tai labai svarbu, nes inventorius turi būti nuoseklus visoje sistemoje, nepaisant to, kur į jį yra kreipiamasi. Jei būtų keli egzemplioriai, galėtų kilti inventoriaus duomenų neatitikimai.
 ```python
 class Inventory:
     _instance = None
@@ -158,7 +158,7 @@ class ProductFactory:
             cls._instance = cls()
         return cls._instance
 ```
-- **Factory Method** - tai yra kūrimo **'design pattern'**, kuris suteikia sąsają superklasės objektams kurti, tačiau leidžia poklasiams keisti kuriamų objektų tipą. **Factory method** kode panaudotas **ProductFactory** klasėje (*create_product()* metodas). Šis metodas suteikia galimybę dinamiškai sukurti skirtingo tipo produktus. Metodas *create_product()* produkto kūrimo procesą padaro abstrakčiu ir taip suteikia lankstumo kode bei palengvina darbą. Su šiuo metodu galima lengvai sukurti naujus produkto tipus, nepakeičiant jau esamo kodo.
+- **Factory Method** - tai yra kūrimo **'design pattern'**, kuris suteikia sąsają superklasės objektams kurti, tačiau leidžia poklasiams keisti kuriamų objektų tipą. **Factory method** kode panaudotas **ProductFactory** klasėje - *create_product()* metodas. Šis metodas suteikia galimybę dinamiškai sukurti skirtingo tipo produktus. Metodas *create_product()* produkto kūrimo procesą padaro abstrakčiu ir taip suteikia lankstumo kode bei palengvina darbą. Su šiuo metodu galima lengvai sukurti naujus produkto tipus, nepakeičiant jau esamo kodo.
 ```python
     def create_product(self, product_type, *args, **kwargs):
         if product_type == "smartphone":
@@ -170,3 +170,10 @@ class ProductFactory:
         return product
 ```
 ## Rezultatai ir apibendrinimas
+- Kode panaudoti visi OOP principai, du dizaino šablonai: **Singleton** ir **Factory method**.
+- Sukurti TXT tipo failai, įgyti įgūdžiai kaip dirbti su tokiais failais.
+- Įgytos žinios kaip taikyti **'unittests'**.
+- Daugiausiai sunkumų sukėlė skaitymas iš failų, kadangi kiekviena eilutė faile turi skirtingą kiekį informacijos.
+
+Darydamas šį kursinį įgyjau papildomų žinių apie objektinį programavimą, išmokau rasti ir pritaikyti informaciją iš įvairių šaltinių.
+Šią programą galima praplėsti pridedant naujų prekių, sukuriant naujus produktų tipus. Be to, programos funkcionalumą galima dar labiau praplėsti, pritedant klases ir metodus, kurie yra susiję su logistika, pavyzdžiui, klientų informacijos kaupimas, prekių tiekėjų informacijos kaupimas ir darbas su šia informacija.
